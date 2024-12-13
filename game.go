@@ -50,7 +50,7 @@ func NewGame() *Game {
 		log.Fatal(err)
 	}
 
-	playerSpriteSheet := spritesheet.NewSpriteSheet(4, 7, 16)
+	playerSpriteSheet := spritesheet.NewSpriteSheet(4, 7, constants.Tilesize)
 
 	return &Game{
 		player: &entities.Player{
@@ -267,8 +267,8 @@ func (g *Game) Update() error {
 
 	g.cam.FollowTarget(g.player.X+8, g.player.Y+8, 320, 240)
 	g.cam.Constrain(
-		float64(g.tilemapJSON.Layers[0].Width)*16.0,
-		float64(g.tilemapJSON.Layers[0].Height)*16.0,
+		float64(g.tilemapJSON.Layers[0].Width)*constants.Tilesize,
+		float64(g.tilemapJSON.Layers[0].Height)*constants.Tilesize,
 		320,
 		240,
 	)
@@ -295,14 +295,14 @@ func (g *Game) Draw(screen *ebiten.Image) {
 			y := index / layer.Width
 
 			//convert tile position into pixel position
-			x *= 16
-			y *= 16
+			x *= constants.Tilesize
+			y *= constants.Tilesize
 
 			img := g.tilesets[layerIndex].Img(id)
 
 			opts.GeoM.Translate(float64(x), float64(y))
 
-			opts.GeoM.Translate(0.0, -float64(img.Bounds().Dy())+16)
+			opts.GeoM.Translate(0.0, -float64(img.Bounds().Dy())+constants.Tilesize)
 
 			opts.GeoM.Translate(g.cam.X, g.cam.Y)
 
@@ -338,7 +338,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		screen.DrawImage(
 			sprite.Img.SubImage(
-				image.Rect(0, 0, 16, 16),
+				image.Rect(0, 0, constants.Tilesize, constants.Tilesize),
 			).(*ebiten.Image),
 			&opts,
 		)
@@ -351,7 +351,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 		screen.DrawImage(
 			sprite.Img.SubImage(
-				image.Rect(0, 0, 16, 16),
+				image.Rect(0, 0, constants.Tilesize, constants.Tilesize),
 			).(*ebiten.Image),
 			&opts,
 		)

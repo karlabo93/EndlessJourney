@@ -1,6 +1,7 @@
 package main
 
 import (
+	"EndlessJourney/constants"
 	"encoding/json"
 	"image"
 	"os"
@@ -32,12 +33,12 @@ func (u *UniformTileset) Img(id int) *ebiten.Image {
 	srcY := id / 22
 
 	//convert the src tile position to pixel src position
-	srcX *= 16
-	srcY *= 16
+	srcX *= constants.Tilesize
+	srcY *= constants.Tilesize
 
 	return u.img.SubImage(
 		image.Rect(
-			srcX, srcY, srcX+16, srcY+16,
+			srcX, srcY, srcX+constants.Tilesize, srcY+constants.Tilesize,
 		),
 	).(*ebiten.Image)
 }
