@@ -266,6 +266,9 @@ func (g *GameScene) Update() SceneId {
 	if inpututil.IsKeyJustPressed(ebiten.KeyQ) {
 		return ExitSceneId
 	}
+	if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+		return PauseSceneId
+	}
 
 	g.player.Dx = 0.0
 	g.player.Dy = 0.0

@@ -7,6 +7,7 @@ type SceneId uint
 const (
 	GameSceneId SceneId = iota
 	StartSceneId
+	PauseSceneId
 	ExitSceneId
 )
 
